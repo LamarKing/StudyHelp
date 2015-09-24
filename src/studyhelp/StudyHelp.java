@@ -35,12 +35,26 @@ public class StudyHelp {
                     newFct.setDef();
         
                     db.add(newFct);
+                    
+                    FileWriter writer = new FileWriter("cards.txt");
+                    
+                     for (String temp : db){
+                       writer.write(temp);
+                    }
+                     writer.close();
                 break;
                 
                 case 2://show study facts
                     for (int x =0;x < db.size();x++){
                         String outFct = db.get(x);
                         JOptionPane.showMessageDialog(null, outFct);
+                        
+                         try (BufferedReader br = new BufferedReader(new FileReader("cards.txt"))) {
+                            String line = null;
+                        while ((line = br.readLine()) != null) {
+                        JOptionPane.showMessageDialog(null, line);
+                    }
+                        
                     }
                 break;
                     
@@ -91,14 +105,14 @@ public class StudyHelp {
                 break;
                     
                 case 5://view saved scores
-                    FileWriter writer = new FileWriter("output.txt");
+                    FileWriter writer = new FileWriter("Scores.txt");
                     
                      for (String temp : scores){
                        writer.write(temp);
                     }
                      writer.close();
                      
-                     try (BufferedReader br = new BufferedReader(new FileReader("output.txt"))) {
+                     try (BufferedReader br = new BufferedReader(new FileReader("Scores.txt"))) {
                             String line = null;
                         while ((line = br.readLine()) != null) {
                         JOptionPane.showMessageDialog(null, line);
